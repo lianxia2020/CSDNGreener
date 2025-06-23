@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         「CSDNGreener」🍃CSDN广告完全过滤|免登录|个性化排版|最强老牌脚本|持续更新
 // @namespace    https://github.com/adlered
-// @version      4.2.4
+// @version      4.2.5
 // @description  ⚡️全新4.0版本！拥有数项独家功能的最强CSDN脚本，不服比一比⚡️|🕶无需登录CSDN，获得比会员更佳的体验|🖥自定义背景图，分辨率自适配，分屏不用滚动|💾超级预优化|🏷原创文章免登录展开|🔌独家推荐内容自由开关|📠免登录复制|🔗防外链重定向|📝独家论坛未登录自动展开文章、评论|🌵全面净化|📈沉浸阅读|🧴净化剪贴板|📕作者信息文章顶部展示
 // @author       Adler
 // @connect      www.csdn.net
@@ -16,154 +16,10 @@
 // @grant        GM_getValue
 // @license      AGPL-3.0-or-later
 // @antifeature  ads CSDNGreener 脚本中嵌入了可一键永久关闭的小广告，不会影响您的使用体验:) 请放心安装！
+// @note         25-06-23 4.2.5 自用:移除APP 推广、Logo 首页链接、右侧DeepSeekR1 满血版推广、底部推荐内容
 // @note         24-07-18 4.2.4 描述更改
-// @note         24-03-28 4.2.3 标题更改
-// @note         23-12-21 4.2.2 修复了一些已知问题
-// @note         23-12-16 4.2.1 文章页牛皮癣优化
-// @note         23-12-15 4.2.0 优化顶栏显示内容，修复了若干由于CSDN前端变化导致优化失效的问题
-// @note         23-05-25 4.1.9 再次修复免登录复制无法使用的问题
-// @note         23-05-11 4.1.8 强杀变异型登录框弹出（不影响自己点击登录使用）
-// @note         23-05-10 4.1.7 增强免登录复制功能
-// @note         23-04-11 4.1.6 去广告更新
-// @note         23-04-06 4.1.5 新增: 跳过 CSDN 的 link 页面
-// @note         23-04-04 4.1.4 增加ads标识
-// @note         23-03-30 4.1.3 移除统计代码，登录问题相关优化（只屏蔽一次）
-// @note         23-02-03 4.1.2 修复了无法登录的问题（评论不登录无法加载暂无解决方案，我们在持续努力中）
-// @note         22-05-30 4.1.1 功能修复，广告屏蔽
-// @note         22-01-18 4.1.0 代码折叠适配
-// @note         22-01-05 4.0.9 更新广告
-// @note         21-12-12 4.0.8 屏蔽学生认证
-// @note         21-10-21 4.0.7 屏蔽红包雨
-// @note         21-09-24 4.0.6 修复登录弹窗无法彻底去除的问题
-// @note         21-09-20 4.0.5 增加自定义背景功能
-// @note         21-09-13 4.0.4 增加一个没有收钱的广告（在设置里，不影响体验）
-// @note         21-09-01 4.0.3 增加用户使用情况统计模块
-// @note         21-08-25 4.0.2 修复右侧置顶栏按钮消失的问题
-// @note         21-08-21 4.0.1 去除右侧悬浮栏，优化脚本
-// @note         21-08-20 4.0.0 全新4.0发布！UI美化，代码优化，兼容Firefox，更多排版模式
-// @note         21-08-20 3.5.7 修复无法完整复制、保存csdn的网页会跳转首页的问题
-// @note         21-08-19 3.5.6 自动隐藏底栏功能改为始终隐藏底栏
-// @note         21-08-18 3.5.5 修复无法选择复制的问题
-// @note         21-06-17 3.5.4 去除右侧红包悬浮窗
-// @note         21-04-18 3.5.3 增加显示小店的设定
-// @note         21-03-13 3.5.2 去主页广告，去文章页面推荐内容Title
-// @note         21-03-01 3.5.1 修改文案
-// @note         21-02-06 3.5.0 修复上传资源界面标签选择消失的问题
-// @note         21-01-17 3.4.9 删除文章页和论坛广告，暂时停用右侧栏滚动功能（CSDN限制）
-// @note         21-01-15 3.4.8 保存按钮优化，修复显示创作中心按钮功能失效的问题
-// @note         21-01-15 3.4.7 改进脚本细节，增加广告屏蔽能力，修复绿化按钮错位的问题
-// @note         20-12-25 3.4.6 主页部分嵌入式广告删除
-// @note         20-12-18 3.4.5 修复绿化设定按钮排版不正确的问题
-// @note         20-12-15 3.4.4 修复了某些子页显示不正常的问题
-// @note         20-10-23 3.4.3 适应新版CSDN，去除主页和登录页广告，以及登录提示，并移除底部信息
-// @note         20-10-20 3.4.2 删除右侧广告
-// @note         20-09-26 3.4.1 修改排版设定，修复登录框弹出的问题
-// @note         20-09-24 3.4.0 紧急修复由于CSDN前端样式修改导致设定开关丢失的问题
-// @note         20-08-27 3.3.9 紧急修复由于CSDN前端样式修改导致脚本失效的问题
-// @note         20-08-26 3.3.8 合法脚本提示
-// @note         20-07-20 3.3.7 修复菜单栏在创作中心显示异常的问题
-// @note         20-07-18 3.3.6 工具箱按钮优化
-// @note         20-07-05 3.3.5 评论复制功能交互优化
-// @note         20-07-04 3.3.4 修复右侧栏消失的问题
-// @note         20-07-03 3.3.3 新增复制评论功能！删除顶部广告
-// @note         20-06-28 3.3.2 提示修改
-// @note         20-06-27 3.3.1 弹窗提示逻辑修改为仅提示一次。
-// @note         20-06-27 3.3.0 网站标题新消息提醒去除
-// @note         20-06-26 3.2.9 恢复GreasyFork平台脚本支持
-// @note         20-06-21 3.2.0 脚本迁移通知
-// @note         20-06-21 3.1.9 增加自动隐藏底栏功能
-// @note         20-06-21 3.1.8 增加自动隐藏顶栏功能，修复选项窗口被点赞长条挡住的Bug，选项窗口布局修改
-// @note         20-06-20 3.1.7 设置窗口大小固定，增加打赏入口
-// @note         20-06-19 3.1.6 显示推荐内容按钮回归，新布局紧急修复
-// @note         20-06-18 3.1.5 自定义功能更新
-// @note         20-06-16 3.1.4 支持大部分功能模块化显示
-// @note         20-06-14 3.1.3 绿化设定优化
-// @note         20-06-14 3.1.2 ISSUE模板调整Support URL
-// @note         20-06-14 3.1.1 增加搜博主文章模块
-// @note         20-06-13 3.1.0 修复设置过期的问题
-// @note         20-06-12 3.0.9 标题回滚
-// @note         20-06-12 3.0.8 主页广告删除，绿化设置仅显示在文章页面，删除页脚，顶部优化，若干细节优化
-// @note         20-06-11 3.0.7 增加官方QQ交流群，增加关闭强制白色主题功能
-// @note         20-06-11 3.0.6 用户名片功能优化
-// @note         20-06-11 3.0.5 优化加载速度
-// @note         20-06-10 3.0.4 修复设置界面遮挡的问题，显示博主头像
-// @note         20-06-09 3.0.3 默认设定修改
-// @note         20-06-09 3.0.2 修复推荐内容按钮刷新不生效的问题，增加工具箱提示框
-// @note         20-06-08 3.0.1 设置中心推出！增加浏览效果选项 && Green Book Icon Update
-// @note         20-06-08 3.0.0 设置中心推出！增加浏览效果选项
-// @note         20-06-07 2.4.2 设置解耦，下个版本搞配置中心
-// @note         20-06-06 2.4.1 修复文章内容消失的问题
-// @note         20-06-04 2.4.0 修复推荐按钮错位的问题
-// @note         20-06-04 2.3.9 窄屏适配优化
-// @note         20-06-04 2.3.8 黑夜模式出现问题，紧急回档到 2.3.6
-// @note         20-06-03 2.3.7 感谢 @AlexLWT 增加黑暗模式
-// @note         20-06-02 2.3.6 AdsByGoogle 删除
-// @note         20-05-25 2.3.5 感谢 @RyanIPO 修复 Cannot read property 'replace' of undefined 报错的问题
-// @note         20-05-24 2.3.4 修复免登录复制功能
-// @note         20-05-22 2.3.3 Logo与背景同步
-// @note         20-05-22 2.3.2 深度删除背景
-// @note         20-05-20 2.3.1 通过require使用NProgress
-// @note         20-05-20 2.3.0 显示推荐内容按钮样式内置，剔除CDN
-// @note         20-05-17 2.2.9 进度条样式更新，时间延时优化
-// @note         20-05-17 2.2.8 更新脚本描述，展开评论的所有回复，删除创作中心按钮，加载进度条
-// @note         20-05-17 2.2.7 更新脚本描述
-// @note         20-05-16 2.2.6 修复第一次点击显示推荐内容无反应的问题
-// @note         20-05-16 2.2.5 删除抢沙发角标，修改显示推荐内容按钮样式
-// @note         20-05-16 2.2.4 感谢来自GitHub的朋友“HeronZhang”的Issue建议，删除所有博客花里胡哨的背景，主页分类中广告清除，CSS样式控制宽度适配代码优化
-// @note         20-05-16 2.2.3 感谢来自GitHub的朋友“RetiredWorld”的代码贡献，使用CSS来控制样式，而不是JS，增大灵活性。
-// @note         20-05-13 2.2.2 屏蔽您的缩放不是100%的提示
-// @note         20-04-29 2.2.1 感谢大家的支持，增加目录显示，自动判断是否存在目录调整页面宽度，屏蔽新增广告，欢迎大家体验并提出意见！
-// @note         20-04-15 2.2.0 一些广告被其他插件屏蔽导致的异常无视之
-// @note         20-03-30 2.1.9 干掉“记录你的创作历程”，干掉未登录情况下的角标提醒
-// @note         20-03-13 2.1.8 窄屏适配加强
-// @note         20-03-13 2.1.7 更新简介
-// @note         20-03-12 2.1.6 宽度自适应（感谢来自GitHub的朋友LeonG7的建议）！修复剪贴板净化无效的问题。
-// @note         20-03-04 2.1.5 适配AdGuard
-// @note         20-02-27 2.1.4 优化免登录复制
-// @note         20-02-25 2.1.3 免登录复制更新，现已可用
-// @note         20-02-24 2.1.2 By Github@JalinWang 更改去除剪贴板劫持的方式，使得原文格式在复制时能够保留
-// @note         20-02-22 2.1.1 紧急修复由于 CSDN 修改前端结构导致的文章错位
-// @note         20-02-11 2.1.0 若干动画优化，视觉体验更流畅
-// @note         20-02-06 2.0.9 武汉加油！修改推荐内容切换开关位置，减少违和感
-// @note         20-01-17 2.0.8 去除右侧广告
-// @note         20-01-17 2.0.7 感谢来自GitHub的朋友“gleans”的建议，去掉页头广告
-// @note         19-12-12 2.0.6 感谢来自GitHub的朋友“yexuesong”的建议，将作者信息在文章顶部展示
-// @note         19-10-30 2.0.5 美化隐藏按钮，增加点击动画
-// @note         19-10-30 2.0.4 删除CSDN官方在主页推送的文章（大多是广告）
-// @note         19-10-30 2.0.3 添加更多屏蔽脚本
-// @note         19-10-30 2.0.0 祝自己生日快乐~完全重写CSDNGreener，统一使用JQuery，效率更高
-// @note         19-10-27 1.5.2 删除分享海报提示&&感谢GitHub的朋友“CHN-STUDENT”的反馈，去除底部课程推荐
-// @note         19-10-27 1.5.1 感谢来自GitHub的朋友“CHN-STUDENT”的细致复现反馈，去除了底部的课程推荐广告
-// @note         19-10-04 1.5.0 移除了底部主题信息和打赏
-// @note         19-09-10 1.4.9 感谢来自GitHub的朋友“programmerZe”的细致复现反馈，修复了评论区点击查看回复后，已经展开的评论会收起的问题
-// @note         19-09-04 1.4.8 感谢来自GitHub的朋友“dwdcth”的细致复现反馈，现在查看原创文章不会无限弹登录窗口了，且加强了自动展开功能
-// @note         19-08-20 1.4.7 感谢油叉用户“SupremeSir”的反馈，修复了右侧悬浮栏遮挡文章的问题
-// @note         19-08-14 1.4.6 无语。刚更新的免登录复制，又改了。修复！
-// @note         19-08-13 1.4.5 更新了独家功能：免登录复制
-// @note         19-08-13 1.4.4 感谢来自GitHub的朋友“iamsunxing”的反馈，修复了顶部不贴边的问题
-// @note         19-08-01 1.4.3 感谢油叉用户“ddddy”的反馈，去除了更多推广广告
-// @note         19-07-30 1.4.2 感谢油叉用户“周义杰”的反馈，增加了防CSDN外链重定向的功能（CSDN臭流氓）
-// @note         19-07-20 1.4.1 修复了推荐内容开关跨文章无效问题（忘了配置Cookie作用域）
-// @note         19-07-19 1.4.0 1. 构架大更新 2. 感谢来自GitHub的朋友"lukemin"的反馈，加入了下方推荐内容是否隐藏开关（实用）
-// @note         19-07-13 1.3.0 感谢来自GitHub的朋友“Holaplace”的反馈，修复了文章无法自动展开的问题（CSDN总改这个，令人头疼）
-// @note         19-06-08 1.2.6 感谢油叉用户“DeskyAki”的反馈，修复了文章无法自动展开的问题
-// @note         19-06-07 1.2.4 修复了登录后评论无法正常打开的问题
-// @note         19-06-07 1.2.3 感谢油叉用户"永远的殿下"的反馈，在一上午的努力攻克下，终于实现了未登录展开评论的语句
-// @note         19-06-05 1.2.0 修复了评论无法自动展开的BUG
-// @note         19-06-04 1.1.9 修复了无法自动展开的BUG（自闭了）
-// @note         19-06-04 1.1.6 CSDN太坏了，把“消息”按钮的Class设置成了“GitChat”，所以修复了“消息”按钮消失的问题
-// @note         19-06-04 1.1.5 1. 优化了论坛体验 2.美化、优化代码结构
-// @note         19-06-04 1.1.4 感谢来自GitHub的朋友“iamsunxing”的反馈，增加了论坛广告匹配规则
-// @note         19-06-03 1.1.3 感谢来自GitHub的朋友“wangwei135”的反馈，去除了评论区上方的广告
-// @note         19-05-27 1.1.2 感谢油叉用户“夏伟杰”的反馈，修复了富文本编辑器无法使用的问题
-// @note         19-05-25 1.1.0 1. 修复了主页广告的问题 2. 论坛自动展开 3. 论坛广告消除
-// @note         19-05-25 1.0.9 感谢油叉用户“渣渣不准说话”的反馈，修复了收藏按钮消失的问题
-// @note         19-03-01 1.0.3 添加页面选择性过滤规则
-// @note         19-03-01 1.0.2 增加了净化剪贴板功能
-// @note         19-03-01 1.0.1 修复了排版问题, 优化了代码结构
-// @note         19-02-26 1.0.0 初版发布
-// @downloadURL https://update.greasyfork.org/scripts/378351/%F0%9F%94%A5%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%F0%9F%94%A5%20CSDN%E5%B9%BF%E5%91%8A%E5%AE%8C%E5%85%A8%E8%BF%87%E6%BB%A4%E3%80%81%E4%BA%BA%E6%80%A7%E5%8C%96%E8%84%9A%E6%9C%AC%E4%BC%98%E5%8C%96%EF%BC%9A%F0%9F%86%95%20%E4%B8%8D%E7%94%A8%E5%86%8D%E7%99%BB%E5%BD%95%E4%BA%86%EF%BC%81%E8%AE%A9%E4%BD%A0%E4%BD%93%E9%AA%8C%E4%BB%A4%E4%BA%BA%E6%83%8A%E5%96%9C%E7%9A%84%E5%B4%AD%E6%96%B0CSDN%E3%80%82.user.js
-// @updateURL https://update.greasyfork.org/scripts/378351/%F0%9F%94%A5%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%F0%9F%94%A5%20CSDN%E5%B9%BF%E5%91%8A%E5%AE%8C%E5%85%A8%E8%BF%87%E6%BB%A4%E3%80%81%E4%BA%BA%E6%80%A7%E5%8C%96%E8%84%9A%E6%9C%AC%E4%BC%98%E5%8C%96%EF%BC%9A%F0%9F%86%95%20%E4%B8%8D%E7%94%A8%E5%86%8D%E7%99%BB%E5%BD%95%E4%BA%86%EF%BC%81%E8%AE%A9%E4%BD%A0%E4%BD%93%E9%AA%8C%E4%BB%A4%E4%BA%BA%E6%83%8A%E5%96%9C%E7%9A%84%E5%B4%AD%E6%96%B0CSDN%E3%80%82.meta.js
+// @downloadURL https://update.greasyfork.org/scripts/378351/%E3%80%8CCSDNGreener%E3%80%8D%F0%9F%8D%83CSDN%E5%B9%BF%E5%91%8A%E5%AE%8C%E5%85%A8%E8%BF%87%E6%BB%A4%7C%E5%85%8D%E7%99%BB%E5%BD%95%7C%E4%B8%AA%E6%80%A7%E5%8C%96%E6%8E%92%E7%89%88%7C%E6%9C%80%E5%BC%BA%E8%80%81%E7%89%8C%E8%84%9A%E6%9C%AC%7C%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0.user.js
+// @updateURL https://update.greasyfork.org/scripts/378351/%E3%80%8CCSDNGreener%E3%80%8D%F0%9F%8D%83CSDN%E5%B9%BF%E5%91%8A%E5%AE%8C%E5%85%A8%E8%BF%87%E6%BB%A4%7C%E5%85%8D%E7%99%BB%E5%BD%95%7C%E4%B8%AA%E6%80%A7%E5%8C%96%E6%8E%92%E7%89%88%7C%E6%9C%80%E5%BC%BA%E8%80%81%E7%89%8C%E8%84%9A%E6%9C%AC%7C%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0.meta.js
 // ==/UserScript==
 var version = "4.2.4";
 var currentURL = window.location.href;
@@ -284,6 +140,81 @@ class Progress {
     }
 }
 var progressor = new Progress();
+
+//----
+/**
+ * 移除指定的元素
+ * @param {string[]} selectors - 要移除的 CSS 选择器列表
+ */
+const removeElementsBySelectors = (selectors = []) => {
+  selectors.forEach(selector => {
+    document.querySelectorAll(selector).forEach(el => el.remove());
+  });
+};
+
+/**
+ * 移除特定类名组合的 div 元素
+ */
+const removeSpecificDivs = () => {
+  const targetClassList = new Set(['toolbar-logo', 'toolbar-subMenu-box', 'csdn-toolbar-fl']);
+  document.querySelectorAll('div').forEach(div => {
+    if ([...targetClassList].every(cls => div.classList.contains(cls))) {
+      div.remove();
+    }
+  });
+};
+
+/**
+ * 插入自定义样式到页面中
+ */
+const injectCustomStyles = () => {
+  if (!document.getElementById('customOverrideStyles')) {
+    const styleSheet = document.createElement('style');
+    styleSheet.id = 'customOverrideStyles';
+    styleSheet.type = 'text/css';
+    styleSheet.textContent = `
+      body {
+        background: none !important;
+      }
+    `;
+    document.head.appendChild(styleSheet);
+  }
+};
+
+/**
+ * 主清理函数：执行所有清理操作
+ */
+const cleanUpUIElements = () => {
+  // 1. 移除固定 ID 的元素
+  document.getElementById('recommendSwitch')?.remove();
+
+  // 2. 移除指定的选择器元素
+  const selectorsToRemove = [
+    'a.option-box.styleab.no—h[data-type="app"]',
+    'a#sidecolumn-deepseek.option-box.sidecolumn.sidecolumn-deepseek[data-type="show"]'
+  ];
+  removeElementsBySelectors(selectorsToRemove);
+
+  // 3. 移除特定类名组合的 div
+  removeSpecificDivs();
+
+  // 4. 注入自定义样式
+  injectCustomStyles();
+};
+
+// 监听 DOM 变化，确保动态加载的内容也能被清理
+const observer = new MutationObserver(() => {
+  cleanUpUIElements();
+});
+
+observer.observe(document.body, {
+  childList: true,
+  subtree: true
+});
+
+// 初始调用一次
+cleanUpUIElements();
+//----
 
 // 自定义 CSS
 // 进度条
