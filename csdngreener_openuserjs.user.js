@@ -7,7 +7,7 @@
 // @contributionURL https://doc.stackoverflow.wiki/web/#/21?page_id=138
 // @name         最强的老牌脚本CSDNGreener：CSDN广告完全过滤、人性化脚本优化
 // @namespace    https://github.com/adlered
-// @version      5.0.3
+// @version      5.0.4
 // @description  全新5.0版本！模块化重构+AI智能模式+HD高分辨率版式|智能自适应布局，完美适配各种分辨率|1920px+屏幕体验更佳|实时预览配置，修改立即生效|无需登录CSDN，获得比会员更佳的体验|免登录复制|全面净化广告|防外链重定向|沉浸阅读体验
 // @connect      www.csdn.net
 // @include      *://*.csdn.net/*
@@ -21,6 +21,7 @@
 // @grant        GM_setClipboard
 // @grant        unsafeWindow
 // @license      AGPL-3.0-or-later
+// @note         26-05-09 5.0.4 屏蔽文章页 C 知道入口
 // @note         26-02-03 5.0.3 AI智能模式：检测原生侧栏避免重复插入（修复双右栏）
 // @note         26-01-23 5.0.2 AI智能模式：修正特例文章左右割裂，明确容器/侧栏宽度
 // @note         26-01-16 5.0.1 博客页AI相关内容屏蔽
@@ -181,7 +182,7 @@
 // @note         19-03-01 1.0.1 修复了排版问题, 优化了代码结构
 // @note         19-02-26 1.0.0 初版发布
 // ==/UserScript==
-var version = "5.0.3";
+var version = "5.0.4";
 var currentURL = window.location.href;
 if (currentURL.indexOf("?") !== -1) {
     currentURL = currentURL.substring(0, currentURL.indexOf("?"));
@@ -1117,6 +1118,20 @@ Logger.log('基础样式已注入');
 // 广告清理系统 - AdCleaner
 // ============================================
 
+// CSDN 知道文章页入口：静态占位和 CknowBlog 动态输入条
+const CKNOW_BLOG_AI_SELECTORS = [
+    ".cknow-ai-box",
+    ".cknow-ai-border",
+    "div[class^='pcContainer_']:has(div[class^='chatMain_'][class*='blogPage_'])",
+    "div[class^='mobileContainer_']:has(div[class^='chatMain_'])"
+];
+
+function removeCknowBlogAiPanel() {
+    CKNOW_BLOG_AI_SELECTORS.forEach(selector => {
+        $(selector).remove();
+    });
+}
+
 // 广告选择器配置 - 按功能分类
 const AD_SELECTORS = {
     // 头部和导航栏
@@ -1178,7 +1193,8 @@ const AD_SELECTORS = {
         ".recommend-tit-mod",           // 推荐内容标题
         ".tool-active-list",            // 底栏"觉得还不错"
         "#treeSkill",                   // 文章底部archive推荐
-        "#recommendNps"                 // 推荐问卷调查
+        "#recommendNps",                // 推荐问卷调查
+        ...CKNOW_BLOG_AI_SELECTORS      // CSDN 知道文章页入口
     ],
 
     // 底部广告
@@ -1376,6 +1392,8 @@ class AdCleaner {
                 $('.leftPop').remove();
                 // 官方脚本横幅
                 $(".toolbar-advert").remove();
+                // CSDN 知道文章页入口
+                removeCknowBlogAiPanel();
 
             } else if (type === 3) {
                 // 循环删除登录提示框（前15秒屏蔽自动弹窗，之后允许用户主动登录）
